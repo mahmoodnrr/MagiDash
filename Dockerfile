@@ -1,12 +1,12 @@
-# Use a base image with OpenJDK Java 17 installed
-FROM eclipse-temurin:17-jdk
-
-# Set the working directory in the container
+# ---------- build stage ----------
+FROM maven:3.9.6-eclipse-temurin-17 AS build
 WORKDIR /app
+COPY pom.xml .
+COPY src ./src
+RUN mvn clean package -DskipTests
 
-# Copy the packaged Spring Boot application JAR file into the container
-COPY target/MagiDash-0.0.1-SNAPSHOT.jar app.jar
-
-# Specify the command to run the Spring Boot application when the container starts
-ENTRYPOINT ["java","-jar","/app/app.jar"]
-
+# ---------- runtime stage ----------
+FROM eclipse-temurin:17-jdk
+WORKDIR /app
+COPY --from=build /app/target/*jar app.jar
+ENTRYPOINT ["java","-jar","app.jar"]
