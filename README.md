@@ -28,7 +28,8 @@ mvn clean package
 ```
 # Sample Result 
 ```bash
-<img width="1082" height="46" alt="image" src="https://github.com/user-attachments/assets/fcfc282b-2658-40c2-822b-85d9757e0e88" />
+$ curl http://localhost:80/dashboards
+[{"createdAt":"2026-01-22T00:00:00.000Z","id":1,"title":"Demo Dashboard","updatedAt":"2026-01-22T00:00:00.000Z"}]
 ```
 
 
