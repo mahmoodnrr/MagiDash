@@ -9,13 +9,12 @@ import org.springframework.web.bind.annotation.*;
 import java.util.*;
 
 @RestController
-@RequestMapping("/dashboards")
 public class DashboardController {
 
     @Autowired
     DashboardRepository repository;
 
-    @GetMapping()
+    @GetMapping("/dashboards")
     public List<Dashboard> getAll() {
         return repository.findAll();
     }
